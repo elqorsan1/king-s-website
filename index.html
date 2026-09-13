@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KING'S | Stronghold Crusader Clan</title>
+<meta name="description" content="KING'S is a Stronghold Crusader clan competing in organized clan wars on GameRanger. See the roster, rules, and game downloads.">
+
+<!-- Favicon: inline crown, no external file needed -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%230a0908'/%3E%3Cpath fill='%23c9a13b' d='M3 8l4 3 5-6 5 6 4-3-2 10H5L3 8zm2 12h14v2H5v-2z'/%3E%3C/svg%3E">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          void: '#0a0908',
+          stone: { 900: '#171512', 800: '#201c17', 700: '#2b251d', 600: '#3a332a' },
+          gold: { DEFAULT: '#c9a13b', bright: '#e8c766', dim: '#8a712f' },
+          crimson: { DEFAULT: '#7d1f2a', bright: '#a5303d', dark: '#571620' },
+          parchment: '#ece3d0',
+          muted: '#9c9384',
+        },
+        fontFamily: {
+          display: ['Cinzel', 'ui-serif', 'serif'],
+          body: ['"Crimson Text"', 'ui-serif', 'Georgia', 'serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root{
+    --line:#3a332a;
+    --void:#0a0908;
+  }
+
+  * { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+  }
+
+  html, body { background:var(--void); }
+  body { font-feature-settings: "liga" 1; }
+
+  h1, h2, h3, h4, .font-display { letter-spacing: 0.01em; }
+
+  section { scroll-margin-top: 100px; }
+
+  ::selection{ background:#c9a13b; color:#0a0908; }
+
+  /* subtle grain / stone texture overlay used on alt sections */
+  .stone-texture{
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.035) 1px, transparent 1px),
+      radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.03) 1px, transparent 1px),
+      radial-gradient(1px 1px at 45% 80%, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 140px 140px, 180px 180px, 220px 220px;
+  }
+
+  /* Corner-bracket frame, used instead of rounded cards + shadow */
+  .frame{ position:relative; }
+  .frame::before, .frame::after{
+    content:'';
+    position:absolute;
+    width:22px; height:22px;
+    pointer-events:none;
+    transition: width .25s ease, height .25s ease, border-color .25s ease;
+  }
+  .frame::before{
+    top:-1px; left:-1px;
+    border-top:2px solid #c9a13b;
+    border-left:2px solid #c9a13b;
+  }
+  .frame::after{
+    bottom:-1px; right:-1px;
+    border-bottom:2px solid #c9a13b;
+    border-right:2px solid #c9a13b;
+  }
+  .frame:hover::before, .frame:hover::after{ width:30px; height:30px; }
+
+  /* Beveled "metal plate" buttons: deliberate alternative to rounded pills */
+  .plate{
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+
+  .btn-primary{
+    background: linear-gradient(180deg, #a5303d, #7d1f2a);
+    border: 1px solid #c9a13b;
+    color:#ece3d0;
+  }
+  .btn-primary:hover{ background: linear-gradient(180deg, #b5424f, #8d2a35); }
+
+  .btn-secondary{
+    background: transparent;
+    border: 1px solid #8a712f;
+    color:#e8c766;
+  }
+  .btn-secondary:hover{ border-color:#e8c766; background:rgba(201,161,59,0.08); }
+
+  /* Nav link underline-on-hover, small-caps for period feel (not uppercase) */
+  .nav-link{
+    font-variant: small-caps;
+    letter-spacing: 0.03em;
+    position:relative;
+    color:#c8bfae;
+  }
+  .nav-link::after{
+    content:'';
+    position:absolute; left:0; bottom:-4px;
+    width:0; height:1px;
+    background:#c9a13b;
+    transition: width .2s ease;
+  }
+  .nav-link:hover{ color:#ece3d0; }
+  .nav-link:hover::after, .nav-link.active::after{ width:100%; }
+  .nav-link.active{ color:#e8c766; }
+
+  #navbar{ background: rgba(10,9,8,0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-bottom:1px solid transparent; transition: background .3s ease, border-color .3s ease; }
+  #navbar.scrolled{ background: rgba(10,9,8,0.92); border-bottom-color:var(--line); }
+
+  /* Hero */
+  .hero{
+    background-image:
+      linear-gradient(90deg, rgba(10,9,8,0.96) 0%, rgba(10,9,8,0.72) 42%, rgba(10,9,8,0.35) 78%, rgba(10,9,8,0.55) 100%),
+      linear-gradient(0deg, rgba(10,9,8,1) 0%, rgba(10,9,8,0.15) 35%, rgba(10,9,8,0.05) 60%),
+      url('https://images.unsplash.com/photo-1753709697924-3f30695a50d7?q=80&w=2400&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center 65%;
+  }
+
+  .hero-reveal > *{
+    opacity:0; transform: translateY(14px);
+    animation: reveal .7s ease forwards;
+  }
+  .hero-reveal > *:nth-child(1){ animation-delay: .05s; }
+  .hero-reveal > *:nth-child(2){ animation-delay: .18s; }
+  .hero-reveal > *:nth-child(3){ animation-delay: .32s; }
+  .hero-reveal > *:nth-child(4){ animation-delay: .46s; }
+  .hero-reveal > *:nth-child(5){ animation-delay: .58s; }
+  @keyframes reveal{ to{ opacity:1; transform:none; } }
+
+  .crest-title{
+    font-size: clamp(3.5rem, 12vw, 8.5rem);
+    line-height: 0.9;
+  }
+
+  /* About image */
+  .about-img{
+    background-image: linear-gradient(0deg, rgba(10,9,8,0.55), rgba(10,9,8,0.05) 45%), url('https://images.unsplash.com/photo-1686747513617-ccd391daa3e2?q=80&w=1400&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center 28%;
+  }
+
+  /* Rules section decorative rule */
+  .decree-line{
+    background: linear-gradient(180deg, transparent, #c9a13b 8%, #c9a13b 92%, transparent);
+  }
+
+  /* Downloads background */
+  .siege-strip{
+    background-image: linear-gradient(180deg, rgba(10,9,8,0.85), rgba(10,9,8,0.93)), url('https://images.unsplash.com/photo-1742629290171-c0ff8999749f?q=80&w=2000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  @media (max-width: 768px){ .siege-strip{ background-attachment: scroll; } }
+
+  /* Rank tab buttons */
+  .rank-tab{
+    border:1px solid var(--line);
+    color:#9c9384;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .rank-tab.active, .rank-tab:hover{
+    color:#e8c766; border-color:#8a712f; background:rgba(201,161,59,0.08);
+  }
+
+  .member-card{ background: linear-gradient(180deg, #1a1712, #14120e); border:1px solid var(--line); }
+  .member-card:hover{ border-color:#8a712f; }
+
+  .copy-id-btn{ transition: color .15s ease, transform .15s ease; }
+  .copy-id-btn:active{ transform: scale(0.92); }
+
+  /* Toast */
+  #toast{
+    position: fixed; left:50%; bottom:28px; transform: translate(-50%, 20px);
+    background:#171512; border:1px solid #c9a13b; color:#ece3d0;
+    padding:10px 18px; font-family:'Cinzel',serif; font-size:0.8rem; letter-spacing:.03em;
+    opacity:0; pointer-events:none; transition: opacity .25s ease, transform .25s ease;
+    z-index:100; max-width: 90vw; text-align:center;
+  }
+  #toast.show{ opacity:1; transform: translate(-50%, 0); pointer-events:auto; }
+
+  /* Mobile menu */
+  #mobileMenu{ max-height:0; overflow:hidden; transition: max-height .3s ease; }
+  #mobileMenu.open{ max-height:420px; }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid #e8c766; outline-offset:2px; }
+
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:#171512; color:#e8c766;
+    padding:10px 16px; z-index:200; border:1px solid #c9a13b;
+  }
+  .skip-link:focus{ left:12px; top:12px; }
+
+  /* ================= LEGENDARY GOLDEN CURSOR ================= */
+  html, body{
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M2 2 L26 11 L14 14 L11 26 Z' fill='%23e8c766' stroke='%230a0908' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, auto;
+  }
+  a, button, [role="button"]{
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='8' fill='none' stroke='%23e8c766' stroke-width='2'/%3E%3Ccircle cx='15' cy='15' r='2.5' fill='%23e8c766'/%3E%3Cpath d='M15 1 L15 5 M15 25 L15 29 M1 15 L5 15 M25 15 L29 15' stroke='%23e8c766' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 15 15, pointer;
+  }
+
+  /* Golden glow that trails the cursor, growing over anything clickable */
+  #cursor-glow{
+    position: fixed; top:0; left:0;
+    width: 24px; height:24px;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(232,199,102,0.55), rgba(201,161,59,0.16) 55%, transparent 70%);
+    pointer-events:none;
+    transform: translate(-50%,-50%);
+    z-index:9999;
+    mix-blend-mode: screen;
+    opacity:0;
+    transition: opacity .3s ease, width .2s ease, height .2s ease;
+  }
+  #cursor-glow.active{ opacity:1; }
+  #cursor-glow.big{ width:46px; height:46px; }
+
+  /* Touch devices: fall back to normal cursor behavior, no custom art / glow */
+  @media (hover: none), (pointer: coarse){
+    html, body, a, button, [role="button"]{ cursor: auto; }
+    #cursor-glow{ display:none; }
+  }
+</style>
+</head>
+
+<body class="bg-void text-parchment font-body antialiased">
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ================= NAVBAR ================= -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 h-24 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-3 font-display text-3xl md:text-4xl tracking-wide text-parchment">
+      <i class="fa-solid fa-chess-rook text-gold text-2xl md:text-3xl"></i>
+      KING'S
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8 text-[15px]">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#roster" class="nav-link">Roster</a>
+      <a href="#rules" class="nav-link">Rules</a>
+      <a href="#downloads" class="nav-link">Downloads</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="https://www.youtube.com/@KINGsSHC" target="_blank" rel="noopener"
+         class="hidden sm:inline-flex items-center gap-2 plate btn-primary px-5 py-2.5 text-sm font-display tracking-wide">
+        <i class="fa-brands fa-youtube"></i> YouTube
+      </a>
+      <button id="menuToggle" aria-label="Toggle menu" aria-expanded="false" class="md:hidden text-parchment text-xl w-9 h-9 flex items-center justify-center border border-stone-600">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="md:hidden bg-stone-900 border-t border-stone-600">
+    <nav class="flex flex-col px-5 py-4 gap-4 text-base">
+      <a href="#about" class="nav-link mobile-link">About</a>
+      <a href="#roster" class="nav-link mobile-link">Roster</a>
+      <a href="#rules" class="nav-link mobile-link">Rules</a>
+      <a href="#downloads" class="nav-link mobile-link">Downloads</a>
+      <a href="https://www.youtube.com/@KINGsSHC" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 plate btn-primary px-5 py-3 text-sm font-display mt-1">
+        <i class="fa-brands fa-youtube"></i> YouTube
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="hero min-h-[100svh] flex items-end md:items-center">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 pb-16 pt-40 md:pt-0 w-full">
+      <div class="hero-reveal max-w-2xl">
+        <p class="font-display text-gold-bright text-sm md:text-base tracking-wide mb-3">
+          A Stronghold Crusader clan on GameRanger
+        </p>
+        <h1 class="crest-title font-display text-parchment mb-5" style="font-weight:900;">KING'S</h1>
+        <p class="font-body text-lg md:text-xl text-parchment/90 mb-8 max-w-xl leading-relaxed">
+          Every siege starts with a plan. We study army timing, build castles that hold, and fight every clan war as one garrison.
+        </p>
+        <div class="flex flex-wrap gap-4 mb-12">
+          <a href="#roster" class="plate btn-primary px-7 py-3.5 font-display tracking-wide inline-flex items-center gap-2">
+            Meet the Roster
+          </a>
+          <a href="https://www.youtube.com/@KINGsSHC" target="_blank" rel="noopener" class="plate btn-secondary px-7 py-3.5 font-display tracking-wide inline-flex items-center gap-2">
+            <i class="fa-brands fa-youtube"></i> Watch on YouTube
+          </a>
+        </div>
+
+        <!-- EDIT ME: update these three figures to reflect your clan's real numbers -->
+        <div class="flex flex-wrap gap-6 md:gap-10">
+          <div class="frame px-5 py-3">
+            <div class="font-display text-2xl md:text-3xl text-gold-bright">2013</div>
+            <div class="text-sm text-muted mt-1">Founded on GameRanger</div>
+          </div>
+          <div class="frame px-5 py-3">
+            <div class="font-display text-2xl md:text-3xl text-gold-bright">24</div>
+            <div class="text-sm text-muted mt-1">Active members</div>
+          </div>
+          <div class="frame px-5 py-3">
+            <div class="font-display text-2xl md:text-3xl text-gold-bright">40+</div>
+            <div class="text-sm text-muted mt-1">Clan matches fought</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="py-24 md:py-32 bg-void">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="grid md:grid-cols-2 gap-14 md:gap-20 items-center">
+
+        <div>
+          <h2 class="font-display text-3xl md:text-4xl text-parchment mb-6">About KING'S</h2>
+          <p class="text-lg leading-relaxed text-parchment/90 mb-5">
+            KING'S is a Stronghold Crusader clan built around organized clan-versus-clan matches on GameRanger, not random public lobbies. Every player trains the same way: studying army timing, economy build orders, and castle layouts that hold up against a real siege instead of just an AI.
+          </p>
+          <p class="text-lg leading-relaxed text-parchment/90 mb-8">
+            The roster is split into three levels: Academy, Medium, and Expert. That way newer players learn against opponents their own size instead of getting thrown straight into a clan war, and moving up a level is how a player earns a permanent spot in the lineup.
+          </p>
+          <blockquote class="font-display text-xl md:text-2xl text-gold-bright border-l-2 border-gold pl-5 py-1">
+            Iron gates. Steady hands. No surrender.
+          </blockquote>
+
+        </div>
+
+        <div class="frame about-img w-full aspect-[4/5] md:aspect-[3/4] flex items-end p-6">
+          <!-- EDIT ME: swap the background-image URL in .about-img (see <style>) for your own clan photo -->
+          <div class="frame px-4 py-2 bg-void/70">
+            <span class="font-display text-sm text-gold-bright">Founded 2013 on GameRanger</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ROSTER ================= -->
+  <section id="roster" class="py-24 md:py-32 bg-stone-900 stone-texture border-y border-stone-600">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="max-w-2xl mb-10">
+        <h2 class="font-display text-3xl md:text-4xl text-parchment mb-4">Roster &amp; Ranks</h2>
+        <p class="text-lg text-parchment/85 leading-relaxed">
+          Every member below carries the KING'S banner into GameRanger lobbies. Tap an ID to copy it and add them directly.
+        </p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="flex flex-wrap gap-3 mb-10" id="rankFilters">
+        <button class="rank-tab active plate px-5 py-2 text-sm font-display" data-filter="all">All Members</button>
+        <button class="rank-tab plate px-5 py-2 text-sm font-display" data-filter="academy">Academy</button>
+        <button class="rank-tab plate px-5 py-2 text-sm font-display" data-filter="medium">Medium</button>
+        <button class="rank-tab plate px-5 py-2 text-sm font-display" data-filter="expert">Expert</button>
+      </div>
+
+      <!-- Cards are injected here by the script below, from the MEMBERS array -->
+      <div id="rosterGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </div>
+  </section>
+
+  <!-- ================= RULES ================= -->
+  <section id="rules" class="py-24 md:py-32 bg-void">
+    <div class="max-w-4xl mx-auto px-5 md:px-8">
+      <h2 class="font-display text-3xl md:text-4xl text-parchment mb-4">The King's Code</h2>
+      <p class="text-lg text-parchment/85 leading-relaxed mb-14 max-w-2xl">
+        Six rules keep a garrison standing. Every member is expected to know them before their first clan match.
+      </p>
+
+      <ol class="relative pl-14 md:pl-16 space-y-10">
+        <div class="decree-line absolute left-5 md:left-6 top-1 bottom-1 w-px"></div>
+
+        <li class="relative">
+          <span class="absolute -left-14 md:-left-16 top-0 w-10 text-right font-display text-gold-bright text-lg">I.</span>
+          <h3 class="font-display text-xl text-parchment mb-1.5">Respect the Garrison</h3>
+          <p class="text-parchment/80 leading-relaxed">Treat every member and every opponent with respect, whether you're holding the castle or losing it.</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-14 md:-left-16 top-0 w-10 text-right font-display text-gold-bright text-lg">II.</span>
+          <h3 class="font-display text-xl text-parchment mb-1.5">Honor the Muster</h3>
+          <p class="text-parchment/80 leading-relaxed">If you commit to a clan match, show up on time, or tell leadership in advance that you can't.</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-14 md:-left-16 top-0 w-10 text-right font-display text-gold-bright text-lg">III.</span>
+          <h3 class="font-display text-xl text-parchment mb-1.5">Fight Fair</h3>
+          <p class="text-parchment/80 leading-relaxed">No cheats, exploits, map-hacks, or deliberate desync abuse. A win earned that way isn't a win.</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-14 md:-left-16 top-0 w-10 text-right font-display text-gold-bright text-lg">IV.</span>
+          <h3 class="font-display text-xl text-parchment mb-1.5">Wear the Crest with Pride</h3>
+          <p class="text-parchment/80 leading-relaxed">In public lobbies you represent KING'S whether you mean to or not, so play like it.</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-14 md:-left-16 top-0 w-10 text-right font-display text-gold-bright text-lg">V.</span>
+          <h3 class="font-display text-xl text-parchment mb-1.5">Hold the Line Together</h3>
+          <p class="text-parchment/80 leading-relaxed">Talk during clan wars. Silence loses castles faster than any siege engine.</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-14 md:-left-16 top-0 w-10 text-right font-display text-gold-bright text-lg">VI.</span>
+          <h3 class="font-display text-xl text-parchment mb-1.5">One Banner</h3>
+          <p class="text-parchment/80 leading-relaxed">Playing under another clan's tag during an active war needs leadership's approval first.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= DOWNLOADS ================= -->
+  <section id="downloads" class="siege-strip py-24 md:py-32 border-y border-stone-600">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="max-w-2xl mb-14">
+        <h2 class="font-display text-3xl md:text-4xl text-parchment mb-4">Downloads &amp; Useful Links</h2>
+        <p class="text-lg text-parchment/85 leading-relaxed">Everything a new member needs before their first game with us.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="frame member-card p-7">
+          <i class="fa-solid fa-file-arrow-down text-gold text-2xl mb-4"></i>
+          <h3 class="font-display text-lg text-parchment mb-2">Game Version 1.1</h3>
+          <p class="text-sm text-muted leading-relaxed mb-5">The base version of Stronghold Crusader our clan plays on. Unpack the archive and the game is ready, no installer needed.</p>
+          <a href="https://drive.google.com/file/d/1s_160eGT4PEtizaO9rMRmsIKHLBDFvoi/view" target="_blank" rel="noopener" class="text-gold-bright text-sm font-display inline-flex items-center gap-2 hover:text-parchment">
+            Download 1.1 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+
+        <div class="frame member-card p-7">
+          <i class="fa-solid fa-file-arrow-down text-gold text-2xl mb-4"></i>
+          <h3 class="font-display text-lg text-parchment mb-2">Game Version 1.3 HD</h3>
+          <p class="text-sm text-muted leading-relaxed mb-5">The HD version some of our matches run on. Check with leadership which version your opponents expect before a war.</p>
+          <a href="https://drive.google.com/file/d/1a8vN6-XYu8V1T3Gele4rn_kGhNWyDcmT/view" target="_blank" rel="noopener" class="text-gold-bright text-sm font-display inline-flex items-center gap-2 hover:text-parchment">
+            Download 1.3 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+
+        <div class="frame member-card p-7">
+          <i class="fa-brands fa-youtube text-gold text-2xl mb-4"></i>
+          <h3 class="font-display text-lg text-parchment mb-2">KING'S on YouTube</h3>
+          <p class="text-sm text-muted leading-relaxed mb-5">Match replays, sieges, and highlight reels from the garrison. Watch how we play before you queue with us.</p>
+          <a href="https://www.youtube.com/@KINGsSHC" target="_blank" rel="noopener" class="text-gold-bright text-sm font-display inline-flex items-center gap-2 hover:text-parchment">
+            Watch replays <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-stone-900 border-t border-stone-600 pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="grid md:grid-cols-3 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-2.5 font-display text-2xl text-parchment mb-3">
+          <i class="fa-solid fa-chess-rook text-gold"></i> KING'S
+        </div>
+        <p class="text-muted text-sm leading-relaxed max-w-xs">A Stronghold Crusader clan built on GameRanger for players who'd rather win a siege than win an argument.</p>
+      </div>
+
+      <div>
+        <h4 class="font-display text-sm text-gold-bright mb-4">Navigate</h4>
+        <ul class="space-y-2 text-sm text-muted">
+          <li><a href="#about" class="hover:text-parchment">About</a></li>
+          <li><a href="#roster" class="hover:text-parchment">Roster</a></li>
+          <li><a href="#rules" class="hover:text-parchment">Rules</a></li>
+          <li><a href="#downloads" class="hover:text-parchment">Downloads</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display text-sm text-gold-bright mb-4">Find us</h4>
+        <div class="flex gap-3">
+          <a href="https://www.youtube.com/@KINGsSHC" target="_blank" rel="noopener" aria-label="YouTube" class="w-10 h-10 border border-stone-600 flex items-center justify-center hover:border-gold hover:text-gold-bright text-muted">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-stone-600 pt-6 space-y-2 text-xs text-muted">
+      <p>Stronghold Crusader is a trademark of Firefly Studios. This is an unofficial, fan-run clan community.</p>
+      <div class="flex flex-col sm:flex-row justify-between gap-2">
+        <p>&copy; <span id="year"></span> KING'S Clan. All rights reserved.</p>
+        <p>Website by ELQORSAN</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =========================================================================
+   MEMBER ROSTER DATA
+   -------------------------------------------------------------------------
+   Edit the array below to update your clan's roster. Nothing else in this
+   file needs to change: cards, levels, and the filter tabs are all built
+   from this data automatically.
+
+   Fields:
+     name  -> display name / gamer tag
+     rank  -> one of: "academy", "medium", "expert" (the player's level)
+     id    -> the player's GameRanger ID (numbers only, as text)
+     role  -> a short flavor tag, e.g. their playstyle or specialty
+   ========================================================================= */
+  const MEMBERS = [
+    { name: "Aldric_the_Bold", rank: "expert", id: "1029384", role: "Founder, siege command" },
+    { name: "IronCrest",       rank: "expert", id: "2938471", role: "Castle design & economy" },
+    { name: "Duke_Osric",      rank: "expert", id: "3847162", role: "Match scheduling & command" },
+    { name: "Falconhelm",      rank: "expert", id: "4756293", role: "Crossbow rush specialist" },
+
+    { name: "ShadowBastion",   rank: "medium", id: "5665384", role: "Defensive walling" },
+    { name: "Ravensworn",      rank: "medium", id: "6574475", role: "Late-game economy" },
+    { name: "GreyMantle",      rank: "medium", id: "7483566", role: "Catapult support" },
+    { name: "Wynter",          rank: "medium", id: "8392657", role: "Scout & early aggression" },
+
+    { name: "Percival_K",      rank: "academy", id: "9201748", role: "Learning army control" },
+    { name: "Sir_Corentin",    rank: "academy", id: "1039284", role: "Trial period" },
+  ];
+
+  const RANK_META = {
+    expert:  { label: "Expert",  icon: "fa-crown" },
+    medium:  { label: "Medium",  icon: "fa-shield-halved" },
+    academy: { label: "Academy", icon: "fa-graduation-cap" },
+  };
+
+  const rosterGrid = document.getElementById("rosterGrid");
+
+  function renderRoster(filter) {
+    rosterGrid.innerHTML = "";
+    const list = filter === "all" ? MEMBERS : MEMBERS.filter(m => m.rank === filter);
+
+    list.forEach((member) => {
+      const meta = RANK_META[member.rank];
+      const card = document.createElement("div");
+      card.className = "frame member-card p-6";
+      card.setAttribute("data-rank", member.rank);
+
+      card.innerHTML = `
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 border border-stone-600 flex items-center justify-center text-gold text-lg">
+            <i class="fa-solid ${meta.icon}"></i>
+          </div>
+          <span class="text-xs font-display text-gold-bright border border-gold-dim px-2.5 py-1">${meta.label}</span>
+        </div>
+        <h3 class="font-display text-lg text-parchment mb-1">${member.name}</h3>
+        <p class="text-sm text-muted mb-4">${member.role}</p>
+        <div class="flex items-center justify-between border-t border-stone-600 pt-3">
+          <span class="text-sm text-parchment/70">ID <span class="text-parchment">${member.id}</span></span>
+          <button class="copy-id-btn text-muted hover:text-gold-bright text-sm flex items-center gap-1.5" data-id="${member.id}" data-name="${member.name}" aria-label="Copy GameRanger ID for ${member.name}">
+            <i class="fa-regular fa-copy"></i> Copy
+          </button>
+        </div>
+      `;
+      rosterGrid.appendChild(card);
+    });
+  }
+
+  renderRoster("all");
+
+  // Filter tabs
+  document.getElementById("rankFilters").addEventListener("click", (e) => {
+    const btn = e.target.closest(".rank-tab");
+    if (!btn) return;
+    document.querySelectorAll(".rank-tab").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderRoster(btn.dataset.filter);
+  });
+
+  // Copy GameRanger ID (event delegation, since cards are re-rendered)
+  rosterGrid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".copy-id-btn");
+    if (!btn) return;
+    copyText(btn.dataset.id).then(() => {
+      showToast(`Copied ${btn.dataset.name}'s GameRanger ID`);
+      const icon = btn.querySelector("i");
+      icon.className = "fa-solid fa-check";
+      setTimeout(() => { icon.className = "fa-regular fa-copy"; }, 1400);
+    });
+  });
+
+  // Clipboard helper with a manual fallback for older browsers
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise((resolve) => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      resolve();
+    });
+  }
+
+  // Toast
+  let toastTimer;
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+  }
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  menuToggle.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    menuToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+  });
+  document.querySelectorAll(".mobile-link").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    });
+  });
+
+  // Navbar background on scroll
+  const navbar = document.getElementById("navbar");
+  window.addEventListener("scroll", () => {
+    navbar.classList.toggle("scrolled", window.scrollY > 30);
+  }, { passive: true });
+
+  // Active nav link highlighting
+  const sections = ["about", "roster", "rules", "downloads"].map(id => document.getElementById(id));
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+        });
+      }
+    });
+  }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
+  sections.forEach(s => s && observer.observe(s));
+
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // ================= LEGENDARY CURSOR + SOUND EFFECTS =================
+  (function () {
+    const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!supportsHover) return; // skip entirely on touch devices
+
+    const INTERACTIVE = 'a, button, [role="button"]';
+
+    // --- Golden glow trail that follows the cursor ---
+    const glow = document.createElement("div");
+    glow.id = "cursor-glow";
+    glow.setAttribute("aria-hidden", "true");
+    document.body.appendChild(glow);
+
+    let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+
+    function animateGlow() {
+      glowX += (mouseX - glowX) * 0.2;
+      glowY += (mouseY - glowY) * 0.2;
+      glow.style.left = glowX + "px";
+      glow.style.top = glowY + "px";
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      glow.classList.add("active");
+    }, { passive: true });
+
+    document.documentElement.addEventListener("mouseleave", () => glow.classList.remove("active"));
+
+    // --- Synthesized "gold & steel" sound effects (no audio files needed) ---
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      return audioCtx;
+    }
+    // Unlock audio on the first real user gesture, per browser autoplay rules
+    ["pointerdown", "keydown"].forEach((evt) => {
+      window.addEventListener(evt, () => getAudioCtx(), { once: true });
+    });
+
+    function playTone(freq, duration, type, gainValue, delay = 0) {
+      setTimeout(() => {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(gainValue, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      }, delay);
+    }
+
+    function playHoverChime() {
+      playTone(1500, 0.12, "triangle", 0.045);
+      playTone(2000, 0.1, "triangle", 0.03, 45);
+    }
+    function playClickClang() {
+      playTone(200, 0.2, "square", 0.05);
+      playTone(700, 0.15, "triangle", 0.035, 20);
+    }
+
+    // Event delegation so this also covers roster cards re-rendered after filtering
+    let hoveredEl = null;
+    document.addEventListener("mouseover", (e) => {
+      const el = e.target.closest(INTERACTIVE);
+      if (el && el !== hoveredEl) {
+        hoveredEl = el;
+        glow.classList.add("big");
+        playHoverChime();
+      } else if (!el) {
+        hoveredEl = null;
+        glow.classList.remove("big");
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (e.target.closest(INTERACTIVE)) playClickClang();
+    });
+  })();
+</script>
+
+</body>
+</html>
