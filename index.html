@@ -158,9 +158,9 @@
 
   /* About image */
   .about-img{
-    background-image: linear-gradient(0deg, rgba(10,9,8,0.55), rgba(10,9,8,0.05) 45%), url('https://images.unsplash.com/photo-1686747513617-ccd391daa3e2?q=80&w=1400&auto=format&fit=crop');
+    background-image: linear-gradient(0deg, rgba(10,9,8,0.55), rgba(10,9,8,0.05) 45%), url('about.png'), url('about.jpg');
     background-size: cover;
-    background-position: center 28%;
+    background-position: center 20%;
   }
 
   /* Rules section decorative rule */
@@ -312,19 +312,15 @@
           </a>
         </div>
 
-        <!-- EDIT ME: update these three figures to reflect your clan's real numbers -->
+        <!-- EDIT ME: update these two figures to reflect your clan's real numbers -->
         <div class="flex flex-wrap gap-6 md:gap-10">
           <div class="frame px-5 py-3">
-            <div class="font-display text-2xl md:text-3xl text-gold-bright">2013</div>
+            <div class="font-display text-2xl md:text-3xl text-gold-bright">2024</div>
             <div class="text-sm text-muted mt-1">Founded on GameRanger</div>
           </div>
           <div class="frame px-5 py-3">
-            <div class="font-display text-2xl md:text-3xl text-gold-bright">24</div>
+            <div class="font-display text-2xl md:text-3xl text-gold-bright">8</div>
             <div class="text-sm text-muted mt-1">Active members</div>
-          </div>
-          <div class="frame px-5 py-3">
-            <div class="font-display text-2xl md:text-3xl text-gold-bright">40+</div>
-            <div class="text-sm text-muted mt-1">Clan matches fought</div>
           </div>
         </div>
       </div>
@@ -351,9 +347,9 @@
         </div>
 
         <div class="frame about-img w-full aspect-[4/5] md:aspect-[3/4] flex items-end p-6">
-          <!-- EDIT ME: swap the background-image URL in .about-img (see <style>) for your own clan photo -->
+          <!-- EDIT ME: the clan photo is loaded from about.png (or about.jpg) next to this file; just replace that file -->
           <div class="frame px-4 py-2 bg-void/70">
-            <span class="font-display text-sm text-gold-bright">Founded 2013 on GameRanger</span>
+            <span class="font-display text-sm text-gold-bright">Founded 2024 on GameRanger</span>
           </div>
         </div>
 
@@ -525,21 +521,47 @@
      name  -> display name / gamer tag
      rank  -> one of: "academy", "medium", "expert" (the player's level)
      id    -> the player's GameRanger ID (numbers only, as text)
-     role  -> a short flavor tag, e.g. their playstyle or specialty
+     role  -> (optional) a short flavor tag, e.g. their playstyle or specialty
    ========================================================================= */
   const MEMBERS = [
-    { name: "Aldric_the_Bold", rank: "expert", id: "1029384", role: "Founder, siege command" },
-    { name: "IronCrest",       rank: "expert", id: "2938471", role: "Castle design & economy" },
-    { name: "Duke_Osric",      rank: "expert", id: "3847162", role: "Match scheduling & command" },
-    { name: "Falconhelm",      rank: "expert", id: "4756293", role: "Crossbow rush specialist" },
+    { name: "[KING's] ~ BUTTERFLY", rank: "expert", id: "13497083" },
+    { name: "[KING's] ~ ELQORSAN", rank: "expert", id: "11983490" },
+    { name: "[KING's] ~ EXPERT [Inc]", rank: "expert", id: "13381109" },
+    { name: "[KING's] ~ KING |F|", rank: "expert", id: "5458026" },
 
-    { name: "ShadowBastion",   rank: "medium", id: "5665384", role: "Defensive walling" },
-    { name: "Ravensworn",      rank: "medium", id: "6574475", role: "Late-game economy" },
-    { name: "GreyMantle",      rank: "medium", id: "7483566", role: "Catapult support" },
-    { name: "Wynter",          rank: "medium", id: "8392657", role: "Scout & early aggression" },
-
-    { name: "Percival_K",      rank: "academy", id: "9201748", role: "Learning army control" },
-    { name: "Sir_Corentin",    rank: "academy", id: "1039284", role: "Trial period" },
+    { name: "19 [King's] 27AMII", rank: "medium", id: "931696" },
+    { name: "[King's] Frost", rank: "medium", id: "7405603" },
+    { name: "[King's] Ovelha", rank: "medium", id: "1622747" },
+    { name: "[King's] Thor", rank: "medium", id: "955958" },
+    { name: "[KING's] ~ AHMED BOB", rank: "medium", id: "13203434" },
+    { name: "[KING's] ... JoE KILL...", rank: "medium", id: "1575545" },
+    { name: "[King's] Saladanha", rank: "medium", id: "1911187" },
+    { name: "[KING's] ~ A.M.R", rank: "medium", id: "13353264" },
+    { name: "[KING's] ~ Ahmed", rank: "medium", id: "13517444" },
+    { name: "[KING's] ~ AK", rank: "medium", id: "13316401" },
+    { name: "[KING's] ~ Arrow", rank: "medium", id: "13300239" },
+    { name: "[KING's] ~ Bassit", rank: "medium", id: "13565433" },
+    { name: "[KING's] ~ BLACK*KNIGHT", rank: "medium", id: "12915682" },
+    { name: "[KING's] ~ General", rank: "medium", id: "12502440" },
+    { name: "[KING's] ~ HITLER", rank: "medium", id: "13519693" },
+    { name: "[KING's] ~ Iranian warrior", rank: "medium", id: "13337211" },
+    { name: "[KING's] ~ KNIGHT", rank: "medium", id: "13075969" },
+    { name: "[KING's] ~ MADMAX", rank: "medium", id: "12782732" },
+    { name: "[KING's] ~ MADMAX", rank: "medium", id: "13493107" },
+    { name: "[KING's] ~ N", rank: "medium", id: "13539156" },
+    { name: "[KING's] ~ NOOBbbbb", rank: "medium", id: "13544243" },
+    { name: "[KING's] ~ scorpio", rank: "medium", id: "10338899" },
+    { name: "[KING's] ~ Seyed WML", rank: "medium", id: "13128845" },
+    { name: "[KING's] ~ SHANY", rank: "medium", id: "12434240" },
+    { name: "[KING's] ~ SNAKE EYE", rank: "medium", id: "8702549" },
+    { name: "[KING's] ~ THE KILLER", rank: "medium", id: "13529215" },
+    { name: "[KING's] ~ The Muslim Knight", rank: "medium", id: "11181561" },
+    { name: "[KING's] ~ winner", rank: "medium", id: "13315163" },
+    { name: "[KING's] ~ Z", rank: "medium", id: "13997218" },
+    { name: "[KING's] ~ [symbol name]", rank: "medium", id: "13506313" },
+    { name: "[KING's] ~ (Saladin) V.M", rank: "medium", id: "12307163" },
+    { name: "[KING's] ~ Rabat", rank: "medium", id: "13565235" },
+    { name: "[KING's] ~z (Bassit)", rank: "medium", id: "13512385" },
   ];
 
   const RANK_META = {
@@ -549,6 +571,8 @@
   };
 
   const rosterGrid = document.getElementById("rosterGrid");
+
+  const esc = (s) => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
   function renderRoster(filter) {
     rosterGrid.innerHTML = "";
@@ -567,11 +591,11 @@
           </div>
           <span class="text-xs font-display text-gold-bright border border-gold-dim px-2.5 py-1">${meta.label}</span>
         </div>
-        <h3 class="font-display text-lg text-parchment mb-1">${member.name}</h3>
-        <p class="text-sm text-muted mb-4">${member.role}</p>
+        <h3 class="font-display text-lg text-parchment ${member.role ? "mb-1" : "mb-4"} break-words">${esc(member.name)}</h3>
+        ${member.role ? `<p class="text-sm text-muted mb-4">${esc(member.role)}</p>` : ""}
         <div class="flex items-center justify-between border-t border-stone-600 pt-3">
           <span class="text-sm text-parchment/70">ID <span class="text-parchment">${member.id}</span></span>
-          <button class="copy-id-btn text-muted hover:text-gold-bright text-sm flex items-center gap-1.5" data-id="${member.id}" data-name="${member.name}" aria-label="Copy GameRanger ID for ${member.name}">
+          <button class="copy-id-btn text-muted hover:text-gold-bright text-sm flex items-center gap-1.5" data-id="${member.id}" data-name="${esc(member.name)}" aria-label="Copy GameRanger ID for ${esc(member.name)}">
             <i class="fa-regular fa-copy"></i> Copy
           </button>
         </div>
