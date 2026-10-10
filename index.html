@@ -130,14 +130,15 @@
   #navbar{ background: rgba(10,9,8,0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-bottom:1px solid transparent; transition: background .3s ease, border-color .3s ease; }
   #navbar.scrolled{ background: rgba(10,9,8,0.92); border-bottom-color:var(--line); }
 
-  /* Hero */
+  /* Hero: shows hero.svg (Citadel of Saladin illustration) from next to this file.
+     To use a real photo instead, drop hero.jpg or hero.png in the same folder; it takes priority. */
   .hero{
     background-image:
       linear-gradient(90deg, rgba(10,9,8,0.96) 0%, rgba(10,9,8,0.72) 42%, rgba(10,9,8,0.35) 78%, rgba(10,9,8,0.55) 100%),
       linear-gradient(0deg, rgba(10,9,8,1) 0%, rgba(10,9,8,0.15) 35%, rgba(10,9,8,0.05) 60%),
-      url('https://images.unsplash.com/photo-1753709697924-3f30695a50d7?q=80&w=2400&auto=format&fit=crop');
+      url('hero.jpg'), url('hero.png'), url('hero.svg');
     background-size: cover;
-    background-position: center 65%;
+    background-position: 70% 65%;
   }
 
   .hero-reveal > *{
@@ -312,15 +313,19 @@
           </a>
         </div>
 
-        <!-- EDIT ME: update these two figures to reflect your clan's real numbers -->
+        <!-- EDIT ME: update these figures to reflect your clan's real numbers -->
         <div class="flex flex-wrap gap-6 md:gap-10">
           <div class="frame px-5 py-3">
             <div class="font-display text-2xl md:text-3xl text-gold-bright">2024</div>
             <div class="text-sm text-muted mt-1">Founded on GameRanger</div>
           </div>
           <div class="frame px-5 py-3">
-            <div class="font-display text-2xl md:text-3xl text-gold-bright">8</div>
+            <div class="font-display text-2xl md:text-3xl text-gold-bright">16</div>
             <div class="text-sm text-muted mt-1">Active members</div>
+          </div>
+          <div class="frame px-5 py-3">
+            <div class="font-display text-2xl md:text-3xl text-gold-bright">KING'S KING</div>
+            <div class="text-sm text-muted mt-1">Founder</div>
           </div>
         </div>
       </div>
@@ -528,6 +533,7 @@
     { name: "[KING's] ~ ELQORSAN", rank: "expert", id: "11983490" },
     { name: "[KING's] ~ EXPERT [Inc]", rank: "expert", id: "13381109" },
     { name: "[KING's] ~ KING |F|", rank: "expert", id: "5458026" },
+    { name: "[KING's] ~ HITLER", rank: "expert", id: "13519693" },
 
     { name: "19 [King's] 27AMII", rank: "medium", id: "931696" },
     { name: "[King's] Frost", rank: "medium", id: "7405603" },
@@ -543,7 +549,6 @@
     { name: "[KING's] ~ Bassit", rank: "medium", id: "13565433" },
     { name: "[KING's] ~ BLACK*KNIGHT", rank: "medium", id: "12915682" },
     { name: "[KING's] ~ General", rank: "medium", id: "12502440" },
-    { name: "[KING's] ~ HITLER", rank: "medium", id: "13519693" },
     { name: "[KING's] ~ Iranian warrior", rank: "medium", id: "13337211" },
     { name: "[KING's] ~ KNIGHT", rank: "medium", id: "13075969" },
     { name: "[KING's] ~ MADMAX", rank: "medium", id: "12782732" },
