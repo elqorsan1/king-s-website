@@ -130,15 +130,14 @@
   #navbar{ background: rgba(10,9,8,0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-bottom:1px solid transparent; transition: background .3s ease, border-color .3s ease; }
   #navbar.scrolled{ background: rgba(10,9,8,0.92); border-bottom-color:var(--line); }
 
-  /* Hero: shows hero.svg (Citadel of Saladin illustration) from next to this file.
-     To use a real photo instead, drop hero.jpg or hero.png in the same folder; it takes priority. */
+  /* Hero */
   .hero{
     background-image:
       linear-gradient(90deg, rgba(10,9,8,0.96) 0%, rgba(10,9,8,0.72) 42%, rgba(10,9,8,0.35) 78%, rgba(10,9,8,0.55) 100%),
       linear-gradient(0deg, rgba(10,9,8,1) 0%, rgba(10,9,8,0.15) 35%, rgba(10,9,8,0.05) 60%),
-      url('hero.jpg'), url('hero.png'), url('hero.svg');
+      url('https://images.unsplash.com/photo-1753709697924-3f30695a50d7?q=80&w=2400&auto=format&fit=crop');
     background-size: cover;
-    background-position: 70% 65%;
+    background-position: center 65%;
   }
 
   .hero-reveal > *{
@@ -320,7 +319,7 @@
             <div class="text-sm text-muted mt-1">Founded on GameRanger</div>
           </div>
           <div class="frame px-5 py-3">
-            <div class="font-display text-2xl md:text-3xl text-gold-bright">16</div>
+            <div class="font-display text-2xl md:text-3xl text-gold-bright">8</div>
             <div class="text-sm text-muted mt-1">Active members</div>
           </div>
           <div class="frame px-5 py-3">
